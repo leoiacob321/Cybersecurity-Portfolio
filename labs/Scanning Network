@@ -1,0 +1,10 @@
+# Network Scanning
+Network Scanning is a process used to identify active devices, open ports, and services on a network to assess security, map topology, or find vulnerabilities.
+
+In this lab I will be using Parrot OS to do Network Scanning on a Metasploitable machine.
+
+## Host Discovery
+This is the process of identifying active hosts in the target network.
+
+### ARP Ping Scan
+This is a network discovery technique that sends Address Resolution Protocol (ARP) requests to devices on a local area network (LAN) to identify active hosts.
