@@ -115,3 +115,51 @@ This is the process of sending packets to the target system in order to bypass p
 ### Fragmentation
 Paket fragmentation refers to spliting of a probe packet into several smaller packets.
 
+In the screenshot below, I captured packets from the Parrot OS to a Windows 11 VM machine using Wireshark. The screenshot shows the fragmented packets being sent from source to destination
+
+<img width="400" height="400" alt="image" src="https://github.com/user-attachments/assets/faaf1d8e-9c6b-4315-801a-229dc0384fd9" />
+
+The nmap command used for this is show below:
+(-f is used to split the IP packets into tiny fragment packets)
+
+<img width="400" height="400" alt="image" src="https://github.com/user-attachments/assets/b6dd1869-8a77-46b3-8e9a-f2e341f76a0c" />
+
+
+### Source Port Manipulatiom
+This is when attackers modify the source port field in outgoing packets. Because many firewalls and IDS make decisions based on port numbers, changing this to a common or "trusted" port make the packets bypass the rules in place. (e.g. 53 for DNS, 443 for HTTPS)
+
+The captured packets below show that port number 80 is used to scan other ports of the target.
+
+<img width="400" height="400" alt="image" src="https://github.com/user-attachments/assets/01ff535a-1b03-4ec6-9df2-e670ad9bfd70" />
+
+
+The nmap command used for this is show below:
+(-g or --source-port performs source port manipulation)
+
+<img width="400" height="400" alt="image" src="https://github.com/user-attachments/assets/57a5823f-19b5-4617-8ae7-abb87e8c9c90" />
+
+
+
+
+## Using Metasploit for Network Scanning
+
+In this example I will use Metasploit to perform a SYN scan on the target(Windows 11 VM).
+
+Use "msfconsole" to start Metasploit and "search" option to find exploits, payloads, auxiliaries and modules by name, CVE, platform or keyword.
+
+<img width="450" height="450" alt="image" src="https://github.com/user-attachments/assets/4d7c099d-346a-4cbf-a446-ade5d68ef630" />
+
+
+I will be using the auxiliary/scanner/portscan/syn module for this example to perform SYN scan on the target. Select this by typing "use auxiliary/scanner/portscan/syn".
+Use "options" to show all configurable settings for the module currently in use. We will configure as show below. ("PORTS" specifies ports scan e.g 20-25, 80, 100-900, "RHOSTS" specifies that target address, "THREADS" controls how many parallel execution threads a module uses (default 1))
+Results below show that 1 host was scanned and no port 80 was found on active host.
+
+<img width="450" height="450" alt="image" src="https://github.com/user-attachments/assets/11ed6873-6c46-4d82-ae6f-e0b99724d647" />
+
+
+
+I also performed a TCP scan for open ports on target Metasploitable VM.
+In this example i used the "auxiliary/scanner/portscan/tcp". The below screenshot displays all open TCP port on the target.
+
+<img width="450" height="450" alt="image" src="https://github.com/user-attachments/assets/e961fb10-568d-449d-a293-8309a01f84e1" />
+
