@@ -157,6 +157,89 @@ This concludes the demo of maintain presistance by exploit Sticky Keys.
 
 
 
-## Maintain Remote Access and Hide Maliciour Activities
+## Maintain Remote Access and Hide Malicious Activities
 
-### Task 1: User System Monitoring and Surveillance using Spyrix
+### Maintain Persistance by Modifying Registry Run Keys
+Registry keys labled as Run and RunOnce are made to automatically run programs whe user logs into the system. An attacker can execute persistance attacks if they discover a service connected to a registry key with full permissions.
+
+
+On Parrot Security VM I generated the tcp payload that will establish a Meterpreter session and a payload that needs to be uploaded to the Run Registry of Windows 11 VM.
+
+
+<img width="400" height="400" alt="image" src="https://github.com/user-attachments/assets/715bac0f-7f8a-4181-87f7-5d0849253734" />
+
+
+Earlier I created a directory to share the files to, "/var/www/html/share", so I will be using this again to transfer the payloads. I copied the files to this location.
+
+<img width="400" height="400" alt="image" src="https://github.com/user-attachments/assets/2125264d-3b44-4b71-b354-0295a9aed28b" />
+
+
+I downloaded both files onto the Windows 11 VM.
+
+<img width="400" height="400" alt="image" src="https://github.com/user-attachments/assets/22b9f2e8-3809-47e4-935f-cb13a61da020" />
+
+
+I ran the "Test.exe" and swithched back to Parrot Security to verify all is working.
+
+<img width="400" height="400" alt="image" src="https://github.com/user-attachments/assets/fe36e2a6-8c09-4b22-83cd-7819fc1a9b5f" />
+
+
+In this task, I will bypass Windows UAC protection via SilentCleanup task present in Windows Task Scheduler.
+
+<img width="400" height="400" alt="image" src="https://github.com/user-attachments/assets/d6f0b4d1-9c65-47f3-912e-3d61917bf5b5" />
+
+
+In an elevated shell session I typed the following command.
+
+<img width="400" height="400" alt="image" src="https://github.com/user-attachments/assets/34e323f7-4a9d-489f-ba62-695241ee1f8b" />
+
+
+In another terminal, I set up another msfconsole and restarted the Windows 11 VM. Once restarted, the session re-establishes itself.
+
+<img width="400" height="400" alt="image" src="https://github.com/user-attachments/assets/196bdc36-5f09-4054-bf83-907b696e03b2" />
+
+
+<img width="400" height="400" alt="image" src="https://github.com/user-attachments/assets/24d9bee8-4f07-4d7a-ada3-fa05206b6472" />
+
+
+Every time the Admin restarts the system, the reverse shell is opened. 
+
+
+
+## Clearing Logs to hide Evidence
+Throughout this lab, I have demonstrated the steps taken by attackers during the system hacking lifecycle. It starts with gaining access to the system, escalating privileges, executing malicious applications and then hiding files. This step focuses on clearing any tracer of the intrusion.
+
+
+### Clearing Logs from Windows Machines
+
+I opened a Shell as Administrator and ran "wevtutil el" to display a list of event logs ("el" below means "enum-logs")
+
+<img width="400" height="400" alt="image" src="https://github.com/user-attachments/assets/67428bf4-0ae6-4b2d-9398-bf14e07ec74f" />
+
+
+Then I ran "wevtutil cl system" to clear system logs ("cl" = clear-logs and [system] can be replaced with any log name)
+
+<img width="400" height="400" alt="image" src="https://github.com/user-attachments/assets/a2dc84ec-5038-4597-a9ad-f1ca5b9cf245" />
+
+
+
+I also used "Cipher" which can be used to encrypt the deleted files on the C: DRIVE.
+The Cipher.exe utility starts overwritting the deleted files. The time taken for Cipher to completes depends on the size of the file/folder/drive.
+
+<img width="400" height="400" alt="image" src="https://github.com/user-attachments/assets/1174c843-ec28-41ce-a795-9b2057260c66" />
+
+~~End
+
+
+### Clearing Logs from Linux Machines
+On the Parrot Security VM I used the BASH (Bourne Again Shell) which is a sh-compatible shell that stores command history in a file called bash history. You can view saved command history using "~/.bash_history" command.
+
+The commands below are as follows:
+  - export HISTSIZE=0: disables the BASH shell from saving the history
+  - history -c: clears stored history
+  - shred ~/.bash_history: shred the history file
+  - more ~/.bash_history: view the shredded history content
+
+<img width="400" height="400" alt="image" src="https://github.com/user-attachments/assets/8bdce8e4-77cf-416a-9bc8-13e788727f48" />
+
+~~End
