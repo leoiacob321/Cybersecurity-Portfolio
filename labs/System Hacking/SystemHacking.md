@@ -27,7 +27,8 @@ By completing this lab, I strengthened my practical skills in system exploitatio
 
 
 
-### Gaining Access
+
+## Gaining Access
 LLMNR (Link Local Multicast Name Resolution) and NBT-NS (NetBIOS Name Service) are two main elements of Windows OSes that are used to perfrom name resolution for hosts present on the same link.
 
 I used Responder. which is a LLMNR, NBT-NS, and MDNS poisoner, to extract information such as the target OS version, client version, NTLM client IP, and NTML username and password hash.
@@ -87,7 +88,7 @@ I copied the reverse.exe file from Parrot OS VM to Windows 11 VM using a Python 
 
 
 
-### Perform Privilege Escalation to Gain Higher Privileges
+## Perform Privilege Escalation to Gain Higher Privileges
   -  Horizontal Privilege Escalation: An unauthorized user tries to access the resources, functions, and other privileges that belong to an authorized user who has similar access permissions.
   -  Vertical Privilege Escalation: An unauthorized user tries to gain access to the resources and functions of a user with higher privileges such as an application or site administrator.
 
@@ -153,3 +154,9 @@ I pressed SHIFT key to trigger sticky keys and session was established. This gav
 
 
 This concludes the demo of maintain presistance by exploit Sticky Keys.
+
+
+
+## Maintain Remote Access and Hide Maliciour Activities
+
+### Task 1: User System Monitoring and Surveillance using Spyrix
