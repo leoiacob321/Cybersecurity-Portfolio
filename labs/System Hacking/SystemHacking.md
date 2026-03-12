@@ -86,7 +86,6 @@ I copied the reverse.exe file from Parrot OS VM to Windows 11 VM using a Python 
 
 
 
-#FINISH
 
 ### Perform Privilege Escalation to Gain Higher Privileges
   -  Horizontal Privilege Escalation: An unauthorized user tries to access the resources, functions, and other privileges that belong to an authorized user who has similar access permissions.
@@ -95,6 +94,62 @@ I copied the reverse.exe file from Parrot OS VM to Windows 11 VM using a Python 
 
 
  ### Escalate Privileges by Bypassing UAC and Exploiting Sticky Keys.
- 
+ Here, I will be exploiting Sticky keys feature to gain access and to escalate privileges on the target.
 
 
+I ran the following command to generate the payload.
+
+<img width="400" height="400" alt="image" src="https://github.com/user-attachments/assets/b8799732-c99e-47b9-870b-2c553cb649c2" />
+
+
+I created a new directory to share the "finaltry.exe" and copied the .exe into that location using the below commands.
+
+<img width="400" height="400" alt="image" src="https://github.com/user-attachments/assets/f74f86a6-8c08-4a8f-8c5d-8fbbe4b63951" />
+
+I started an apache server.
+
+<img width="400" height="400" alt="image" src="https://github.com/user-attachments/assets/af20e9b8-a2b7-4697-a0b0-114ceb4417e1" />
+
+
+I launched Metasploit Frame work using "msfconsole" and typed "use exploit/multi/handler". With this being opened i set the following parameters. This sets up a reverse_tcp payload with the host being the attacker and the listening port as 444.
+
+<img width="400" height="400" alt="image" src="https://github.com/user-attachments/assets/ef4033e5-83fb-4d0c-8a79-9d0fb77b094b" />
+
+
+I switched to my Windows 11 VM and downloaded/ran the finaltry.exe payload.
+
+<img width="400" height="400" alt="image" src="https://github.com/user-attachments/assets/7dbb508b-6595-42b4-a0f1-089d1e9a461a" />
+
+
+Confirm you are in the target machine.
+
+<img width="400" height="400" alt="image" src="https://github.com/user-attachments/assets/0f17b8e7-9e06-4c11-8a18-92ed7e3fff41" />
+
+
+I backgrounded the session using "background" and searched for bypassuac using "search bypassuac" command.
+
+<img width="400" height="400" alt="image" src="https://github.com/user-attachments/assets/96836b5a-c3c0-4060-87e6-e3d5878d9b23" />
+
+
+Here I am using the FodHelper Registry keys to bypass Windows UAC protection.
+
+<img width="400" height="400" alt="image" src="https://github.com/user-attachments/assets/fd6d1971-5426-4091-a467-b7b920c25c8a" />
+
+
+In my lab the privileges were already elevated hence the below result but the "bypassuac_fodhelper" should be able to get you elevated privileges.
+
+<img width="400" height="400" alt="image" src="https://github.com/user-attachments/assets/9d00270d-3ad0-4baa-8ffa-2adb258fc71a" />
+
+
+
+I will now use the sticky_keys mpdule present in Metasploit to exploit the sticky keys feature in Windows 11.
+
+<img width="400" height="400" alt="image" src="https://github.com/user-attachments/assets/30583faa-926a-4ce0-bdbf-eb5dbbb35ac5" />
+
+
+I pressed SHIFT key to trigger sticky keys and session was established. This gave me elevated privileges.
+
+<img width="400" height="400" alt="image" src="https://github.com/user-attachments/assets/dd101328-5692-4c4e-a7c0-f00537a75f82" />
+
+
+This concludes the demo of maintain presistance by exploit Sticky Keys.
