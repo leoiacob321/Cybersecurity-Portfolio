@@ -17,6 +17,7 @@ Ended up being way more painful than I expected because of VirtualBox networking
   - Windows 11 agent (Internal): 10.0.0.40
 
 
+
 ## What Actually Worked
 
 ### 1. Ubuntu – Install Wazuh All-in-One (manager + indexer + dashboard)
