@@ -1,8 +1,6 @@
 # My Wazuh Home Lab Setup – Ubuntu Manager
 
 
-
-
 Documenting how I got Wazuh running in my home lab so I (or future me) don't have to google the same stuff again.
 
 Goal was simple: one Ubuntu VM as the central Wazuh manager + indexer + dashboard, and a Windows 11 VM as an agent sending logs/alerts back to it.  
@@ -17,7 +15,7 @@ Ended up being way more painful than I expected because of VirtualBox networking
 - **IPs used**:
   - Ubuntu manager (Internal): 10.0.0.50
   - Windows 11 agent (Internal): 10.0.0.40
- 
+
 
 ## What Actually Worked
 
@@ -91,4 +89,12 @@ Add Sysmon later for way better visibility (not done yet in this setup)
   - Save the dashboard password immediately – recovering it later is annoying
   - Test ping both ways before even attempting agent install
   - If agent says "Unable to connect to enrollment service" (error 1208), 99% chance it's wrong IP or port 1515 blocked
+
+
+### Next Steps (TODO)
+  - Install Sysmon on Windows with a good config (SwiftOnSecurity one probably)
+  - Add agents to Parrot OS and Windows Server 2022 VMs
+  - Write some custom Wazuh rules for my red-team attacks
+  - Maybe feed Suricata logs into Wazuh too
+
 
