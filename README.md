@@ -13,7 +13,7 @@ Welcome to my cybersecurity portfolio. This repository documents my hands‑on l
 
 ## Certifications
 - Professional Academy Diploma in Cybersecurity (UCD, 2025)
-- CEH (in progress, expected March 2026)
+- CEH (in progress)
 
 ## Lab Work
 All write‑ups are documented in the `/labs` directory..
@@ -21,3 +21,5 @@ All write‑ups are documented in the `/labs` directory..
 ---
 
 This portfolio is continuously updated as I complete new labs, build tools, and expand my skills.
+
+(Some write ups may need a touch of rewriting)
