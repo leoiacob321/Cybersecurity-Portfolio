@@ -1,25 +1,18 @@
+# Cybersecurity Portfolio – Leonard Iacob
 
-# Cybersecurity Portfolio – Leo
+IT Developer at PTSB transitioning into offensive security and SOC work full-time. This repo documents my home lab work, write-ups, and hands-on practice.
 
-Welcome to my cybersecurity portfolio. This repository documents my hands‑on learning, lab work, tools, and progress as I transition into a professional cybersecurity role.
-
-## Focus Areas
-- Penetration Testing
-- SOC Operations & Threat Detection
-- Vulnerability Analysis
-- Linux & Windows Security
-- Web Application Security
-- SIEM (Wazuh), Network Monitoring, and Incident Response
+## What's in here
+- `/labs` — write-ups covering enumeration, recon, scanning, system hacking, vulnerability analysis, and malware threats
+- `/BlueTeam` — Wazuh SIEM setup and detection work
 
 ## Certifications
-- Professional Academy Diploma in Cybersecurity (UCD, 2025)
-- CEH (in progress)
+- Professional Academy Diploma in Cybersecurity — UCD, 2025
+- CEH — in progress
 
-## Lab Work
-All write‑ups are documented in the `/labs` directory..
+## Tools
+Nmap · Metasploit · Burp Suite · SQLMap · Nikto · Hydra · Hashcat · Wireshark · Wazuh
 
----
-
-This portfolio is continuously updated as I complete new labs, build tools, and expand my skills.
-
-(Some write ups may need a touch of rewriting)
+## Links
+- [LinkedIn](https://linkedin.com/in/leonard-iacob-53a589198)
+- [TryHackMe](https://tryhackme.com) — 100+ rooms completed across Junior Pentester and SOC Level 1 paths
