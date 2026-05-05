@@ -1,10 +1,5 @@
 #!/usr/bin/env python3
-"""
-Password Vault — web interface
-Run:  python vault_web.py
-Then open http://localhost:5000 on this machine,
-     or http://<your-local-ip>:5000 on your phone (same WiFi).
-"""
+# password vault — flask web interface for phone/local network access
 
 import os, json, datetime, secrets as _secrets
 from pathlib import Path
@@ -20,7 +15,7 @@ from cryptography.hazmat.primitives.kdf.pbkdf2 import PBKDF2HMAC
 from cryptography.hazmat.primitives import hashes
 from cryptography.hazmat.primitives.ciphers.aead import AESGCM
 
-# ── paths ──────────────────────────────────────────────────────────────────────
+# paths
 VAULT_DIR  = Path.home() / ".password_vault"
 VAULT_FILE = VAULT_DIR / "vault.enc"
 SALT_FILE  = VAULT_DIR / "salt.bin"
@@ -30,11 +25,11 @@ os.chmod(VAULT_DIR, 0o700)
 
 AUTO_LOCK_SECONDS = 300
 
-# ── flask setup ────────────────────────────────────────────────────────────────
+# flask setup
 app = Flask(__name__)
 _sessions: dict = {}   # token -> {key, entries, expires}
 
-# ── helpers ────────────────────────────────────────────────────────────────────
+# helpers
 def _write_secret(path: Path, data: bytes) -> None:
     path.write_bytes(data)
     os.chmod(path, 0o600)
@@ -80,7 +75,7 @@ def _new_session(key, entries) -> str:
     }
     return token
 
-# ── routes ─────────────────────────────────────────────────────────────────────
+# routes
 @app.route("/")
 def index():
     return render_template("index.html")
@@ -187,7 +182,7 @@ def delete_entry(idx):
     _write_secret(VAULT_FILE, encrypt(s["entries"], s["key"]))
     return jsonify({"ok": True})
 
-# ── main ───────────────────────────────────────────────────────────────────────
+# main
 if __name__ == "__main__":
     import socket
     try:

@@ -1,33 +1,12 @@
 #!/usr/bin/env python3
-"""
-Password Vault v2 — offline desktop app
-========================================
-New in v2:
-  • Argon2id key derivation  (replaces PBKDF2)
-  • Clipboard auto-clear after 30 s
-  • Auto-lock after 5 min inactivity
-  • Password history  (last 3 versions per entry, restorable)
-  • Password health dashboard
-      – weak passwords  (entropy < 50 bits)
-      – reused passwords
-      – old passwords   (unchanged > 365 days)
-  • Strength meter in add/edit dialog
-
-Install on Garuda / Arch
--------------------------
-  sudo pacman -S python-argon2-cffi python-cryptography python-pyperclip xclip
-
-Run
----
-  python password_vault.py
-"""
+# offline password vault — desktop GUI (tkinter)
 
 import tkinter as tk
 from tkinter import ttk, messagebox
 import json, os, secrets, string, math, datetime
 from pathlib import Path
 
-# ── optional deps ─────────────────────────────────────────────────────────────
+# optional deps
 try:
     from argon2.low_level import hash_secret_raw, Type
     ARGON2_OK = True
@@ -44,7 +23,7 @@ from cryptography.hazmat.primitives.kdf.pbkdf2 import PBKDF2HMAC
 from cryptography.hazmat.primitives import hashes
 from cryptography.hazmat.primitives.ciphers.aead import AESGCM
 
-# ── paths ─────────────────────────────────────────────────────────────────────
+# paths
 VAULT_DIR  = Path.home() / ".password_vault"
 VAULT_FILE = VAULT_DIR / "vault.enc"
 SALT_FILE  = VAULT_DIR / "salt.bin"
@@ -56,14 +35,14 @@ def _write_secret(path: Path, data: bytes) -> None:
     path.write_bytes(data)
     os.chmod(path, 0o600)
 
-# ── tunables ──────────────────────────────────────────────────────────────────
+# tunables
 CLIPBOARD_CLEAR_MS = 30_000
 AUTO_LOCK_MS       = 300_000
 HISTORY_LIMIT      = 3
 WEAK_BITS          = 50
 OLD_DAYS           = 365
 
-# ── crypto ────────────────────────────────────────────────────────────────────
+# crypto
 def derive_key(password: str, salt: bytes) -> bytearray:
     if ARGON2_OK:
         return bytearray(hash_secret_raw(
@@ -82,7 +61,7 @@ def decrypt(blob: bytes, key: bytes) -> list:
     nonce, ct = blob[:12], blob[12:]
     return json.loads(AESGCM(key).decrypt(nonce, ct, None))
 
-# ── helpers ───────────────────────────────────────────────────────────────────
+# helpers
 def gen_password(length=20) -> str:
     chars = string.ascii_letters + string.digits + "!@#$%^&*()-_=+"
     return "".join(secrets.choice(chars) for _ in range(length))
@@ -121,7 +100,7 @@ def health_report(entries: list) -> dict:
     old    = {i for i, e in enumerate(entries) if days_ago(e.get("updated", now_iso())) > OLD_DAYS}
     return {"reused": reused, "weak": weak, "old": old}
 
-# ── palette ───────────────────────────────────────────────────────────────────
+# palette
 BG      = "#1a1a2e"
 PANEL   = "#16213e"
 CARD    = "#0f3460"
@@ -141,7 +120,7 @@ FT      = ("Segoe UI", 20, "bold")
 FS      = ("Segoe UI", 9)
 FM      = ("Consolas", 11)
 
-# ── widget factories ──────────────────────────────────────────────────────────
+# widget factories
 def lbl(p, text, font=F, fg=TEXT, bg=BG, **kw):
     return tk.Label(p, text=text, font=font, fg=fg, bg=bg, **kw)
 
@@ -177,7 +156,7 @@ def scrolled(parent):
         canvas.bind_all(seq, lambda e, d=delta: _scroll(e, d))
     return outer, inner
 
-# ── lock screen ───────────────────────────────────────────────────────────────
+# lock screen
 class LockScreen(tk.Frame):
     def __init__(self, master, on_unlock):
         super().__init__(master, bg=BG)
@@ -264,7 +243,7 @@ class LockScreen(tk.Frame):
         self.err.config(text="")
         self.on_unlock(key, entries)
 
-# ── entry dialog ──────────────────────────────────────────────────────────────
+# entry dialog
 class EntryDialog(tk.Toplevel):
     def __init__(self, master, on_save, entry=None):
         super().__init__(master)
@@ -378,7 +357,7 @@ class EntryDialog(tk.Toplevel):
         })
         self.destroy()
 
-# ── health dashboard ──────────────────────────────────────────────────────────
+# health dashboard
 class HealthDashboard(tk.Toplevel):
     def __init__(self, master, entries, on_goto):
         super().__init__(master)
@@ -451,7 +430,7 @@ class HealthDashboard(tk.Toplevel):
         if not any_issue:
             lbl(inner, "✅  All passwords look healthy!", font=FB, fg=SUCCESS, bg=BG).pack(pady=40)
 
-# ── vault screen ──────────────────────────────────────────────────────────────
+# vault screen
 class VaultScreen(tk.Frame):
     def __init__(self, master, key, entries, on_lock):
         super().__init__(master, bg=BG)
@@ -677,7 +656,7 @@ class VaultScreen(tk.Frame):
         self.status.config(text=msg)
         self.after(ms, lambda: self.status.config(text=""))
 
-# ── app shell ─────────────────────────────────────────────────────────────────
+# app shell
 class App(tk.Tk):
     def __init__(self):
         super().__init__()
