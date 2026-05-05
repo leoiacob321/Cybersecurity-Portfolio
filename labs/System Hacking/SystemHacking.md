@@ -1,23 +1,6 @@
 # System Hacking
-System hacking is the practice of exploiting vulnerabilities in a computer system to gain unauthorized access, escalate privileges, or manipulate system behavior. In cybersecurity, it can be performed by malicious attackers or by ethical hackers who test systems to strengthen defenses.
 
-
-## Overview
-In this lab, I focused on the practical techniques attackers use to compromise operating systems and gain control over a target machine. My goal was to walk through the full system‑hacking lifecycle from the perspective of an ethical hacker: identifying weaknesses, exploiting them, escalating privileges, and analyzing the impact of the compromise.
-Throughout the exercise, I worked hands‑on with authentication mechanisms, password attacks, privilege escalation paths, and post‑exploitation techniques. By simulating real‑world attacker behavior in a controlled environment, I strengthened my understanding of how system‑level breaches occur and how defenders can detect and prevent them.
-This lab allowed me to apply both offensive and defensive thinking, reinforcing my ability to evaluate system security from an attacker’s point of view while maintaining an ethical, structured methodology.
-
-
-## Objectives
-The objective of this lab was to demonstrate my ability to compromise a system ethically, document each stage of the attack, and analyze the security implications. Specifically, I aimed to:
-  - Perform targeted enumeration to identify system vulnerabilities.
-  - Execute password‑based attacks to gain initial access.
-  - Successfully authenticate to the target system using recovered credentials.
-  - Escalate privileges to administrative/root level.
-  - Extract sensitive information such as password hashes or system configuration data.
-  - Understand how attackers maintain persistence and cover their tracks.
-  - Reflect on defensive controls that could prevent or detect each step.
-By completing this lab, I strengthened my practical skills in system exploitation, improved my understanding of attacker workflows, and gained experience documenting findings in a professional, security‑focused format.
+Walkthrough of the system hacking lifecycle — gaining access, escalating privileges, maintaining persistence, and clearing tracks. All done in a controlled home lab environment.
 
 
 ## Lab Environment
@@ -59,8 +42,6 @@ Copy the hashes in pluma test editor using "pluma hash.txt" and paste them in.
 I then used John the Ripper (john) to start cracking the password hashes and display the password in plain text.
 
 <img width="400" height="400" alt="image" src="https://github.com/user-attachments/assets/65507dff-925f-4a2b-bfea-20e05cf80598" />
-
-# FINISH THIS
 
 ### Gain Access to System using Reverse Shell Generator 
 A reverse shell generator is a tool that creates a payload designed to make a target machine connect back to an attacker’s machine, giving the attacker an interactive shell.
