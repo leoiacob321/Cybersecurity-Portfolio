@@ -9,6 +9,7 @@ IT Developer at PTSB transitioning into offensive security and SOC work full-tim
 - `/Metasploitable-Nessus` — Nessus Essentials vulnerability scan with manual verification of VNC weak password and Tomcat default creds → WAR upload → RCE
 - `/API` — web app and API testing on OWASP Juice Shop: SQLi, mass assignment, IDOR, XSS
 - `/password-vault` — offline password manager built in Python with AES-GCM encryption and Argon2id key derivation
+- `/scripts` — custom Python tooling: autorecon.py chains nmap with port-based enumeration (SMB, HTTP, FTP, SMTP, SSH) and generates a markdown report
 - `/BlueTeam` — Wazuh SIEM setup and detection lab
 - `/labs` — technique write-ups covering enumeration, recon, scanning, system hacking, and vulnerability analysis
 
