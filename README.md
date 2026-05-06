@@ -6,6 +6,7 @@ IT Developer at PTSB transitioning into offensive security and SOC work full-tim
 
 - `/home-lab-ad-pentest` — full internal AD pentest: network recon → password spraying → domain admin → NTDS.dit dump
 - `/Metasploitable` — black box Linux assessment: three independent paths to root (vsftpd backdoor, bindshell, Samba RCE)
+- `/Metasploitable-Nessus` — Nessus Essentials vulnerability scan with manual verification of VNC weak password and Tomcat default creds → WAR upload → RCE
 - `/API` — web app and API testing on OWASP Juice Shop: SQLi, mass assignment, IDOR, XSS
 - `/password-vault` — offline password manager built in Python with AES-GCM encryption and Argon2id key derivation
 - `/BlueTeam` — Wazuh SIEM setup and detection lab
