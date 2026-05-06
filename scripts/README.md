@@ -32,7 +32,7 @@ sudo python3 autorecon.py 10.10.10.20
 **Output folder contains:**
 - `nmap.txt` / `nmap.xml` — full nmap scan results
 - `smb-shares.txt`, `smb-users.txt`, `enum4linux.txt` — SMB enumeration
-- `ftp.txt`, `ssh.txt`, `smtp.txt` — service-specific results
+- `ftp.txt`, `ssh.txt`, `smtp.txt` — per-service nmap script output
 - `http-<port>-headers.txt`, `nikto-<port>.txt` — web enumeration
 - `report.md` — summary with open ports table and file index
 
